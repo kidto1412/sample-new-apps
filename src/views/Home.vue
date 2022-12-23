@@ -11,7 +11,7 @@
     </div>
     <div v-else>
       <v-row>
-        <v-col cols="10">
+        <v-col cols="9">
           <v-text-field v-model="search" label="Search" outlined clearable>
             ></v-text-field
           >
@@ -20,7 +20,15 @@
           <v-select
             v-model="select"
             :items="items"
-            label="Country"
+            label="country"
+            outlined
+          ></v-select>
+        </v-col>
+        <v-col>
+          <v-select
+            v-model="selectCategory"
+            :items="categories"
+            label="Category"
             outlined
           ></v-select>
         </v-col>
@@ -65,8 +73,18 @@ export default {
     return {
       search: "",
       select: "",
+      selectCategory: "",
       // items: ["Foo", "Bar", "Fizz", "Buzz"],
       items: ["ae", "ar", "us", "fr", "ch"],
+      categories: [
+        "business",
+        "entertainment",
+        "general",
+        "health",
+        "science",
+        "sports",
+        "technology",
+      ],
       articles: [],
       show: false,
     };
@@ -92,6 +110,8 @@ export default {
               search +
               "&country=" +
               this.select +
+              "&category=" +
+              this.selectCategory +
               "&apiKey=" +
               this.apiKey
           )
