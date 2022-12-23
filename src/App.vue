@@ -1,19 +1,25 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app>
+    <v-app-bar app color="primary" dark> News App </v-app-bar>
+    <alert />
+    <v-main>
+      <router-view />
+    </v-main>
+  </v-app>
 </template>
 
-<style lang="stylus">
-#app
-  font-family Avenir, Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
-  text-align center
-  color #2c3e50
-  margin-top 60px
-</style>
+<script>
+import { mapActions } from "vuex";
+export default {
+  name: "App",
+  components: {
+    Alert: () => import("@/components/Alert.vue"),
+  },
+  data: () => ({
+    //
+  }),
+  ...mapActions({
+    setAlert: "alert/set",
+  }),
+};
+</script>
