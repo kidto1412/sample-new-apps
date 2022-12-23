@@ -22,6 +22,9 @@ export default {
     setToken: ({ commit }, payload) => {
       commit("setToken", payload);
     },
+    fetchApiKey: ({ commit, state }) => {
+      commit("setToken", state.apiKey);
+    },
   },
 
   getters: {
@@ -30,6 +33,6 @@ export default {
     user: (state) => state.user,
     guest: (state) => Object.keys(state.user).length === 0,
     isLoggedIn: (state) => state.user !== 0,
-    apiKey: (state) => state.user.apiKey,
+    apiKey: (state) => state.apiKey,
   },
 };

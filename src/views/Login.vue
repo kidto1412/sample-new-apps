@@ -67,6 +67,7 @@ export default {
       setToken: "auth/setToken",
       setAuth: "auth/set",
       setAlert: "alert/set",
+      fetchApiKey: "auth/fetchApiKey",
     }),
     handlerLogin() {
       if (this.email != "" && this.password != "") {
@@ -77,6 +78,7 @@ export default {
           this.$emit("authenticated", true);
           this.setToken("1d5ac57eebda4972af6be89f6aff2d6b");
           this.setAuth(this.user);
+          this.fetchApiKey();
           this.setAlert({
             status: true,
             color: "success",
