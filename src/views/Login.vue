@@ -76,7 +76,8 @@ export default {
           this.password == this.user.password
         ) {
           this.$emit("authenticated", true);
-          this.setToken("1d5ac57eebda4972af6be89f6aff2d6b");
+          localStorage.setItem("apiKey", "1d5ac57eebda4972af6be89f6aff2d6b");
+          this.setToken(localStorage.getItem("apiKey"));
           this.setAuth(this.user);
           this.fetchApiKey();
           this.setAlert({

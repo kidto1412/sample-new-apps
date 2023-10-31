@@ -22,8 +22,8 @@ export default {
     setToken: ({ commit }, payload) => {
       commit("setToken", payload);
     },
-    fetchApiKey: ({ commit, state }) => {
-      commit("setToken", state.apiKey);
+    fetchApiKey: ({ commit }) => {
+      commit("setToken", localStorage.getItem("apiKey"));
     },
   },
 

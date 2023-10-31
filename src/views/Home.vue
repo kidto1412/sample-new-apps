@@ -38,6 +38,9 @@
           Search
         </v-btn>
       </div>
+      <div v-if="!articles.length">
+        <h5>Berita tidak ditemukan</h5>
+      </div>
       <v-card class="mb-5" v-for="article in articles" :key="article.id">
         <v-list-item three-line>
           <v-list-item-content>
@@ -60,6 +63,9 @@
           {{ article.author }}
         </v-chip>
       </v-card>
+      <v-text-field v-model="a" label="a" outlined clearable> ></v-text-field>
+      <v-text-field v-model="b" label="b" outlined clearable> ></v-text-field>
+      <v-text-field v-model="c" label="c" outlined clearable> ></v-text-field>
     </div>
   </v-container>
 </template>
@@ -87,6 +93,9 @@ export default {
       ],
       articles: [],
       show: false,
+      a: "",
+      b: "",
+      c: "",
     };
   },
   computed: {
@@ -106,12 +115,9 @@ export default {
         this.show = true;
         this.axios
           .get(
-            "https://newsapi.org/v2/top-headlines?q=" +
+            "https://newsapi.org/v2/everything?q=" +
               search +
               "&country=" +
-              this.select +
-              "&category=" +
-              this.selectCategory +
               "&apiKey=" +
               this.apiKey
           )
@@ -125,14 +131,36 @@ export default {
           });
       }
     },
+    segitiga() {
+      this.a = 1;
+      this.b = 0;
+      this.c = 0;
+      if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+        console.log("bukan segitiga");
+      } else {
+        if (
+          (this.a == this.b && this.b != this.c && this.a != this.c) ||
+          (this.b == this.c && this.b !== this.a) ||
+          (this.a == this.c && this.b != this.a && this.b !== this.c)
+        ) {
+          console.log("segitiga sama kaki");
+        } else if (this.a == this.b || this.a == this.c || this.b == this.c) {
+          console.log("segitiga sama sisi");
+        } else {
+          console.log("segitiga sembarang");
+        }
+      }
+    },
   },
   created() {
+    this.segitiga();
     this.fetchApiKey();
+    localStorage.getItem("apiKey");
     this.axios
       .get(
         `https://newsapi.org/v2/everything?q=${
           this.search == "" ? "keyword" : this.search
-        }&apiKey=${this.apiKey}`
+        }&apiKey=1d5ac57eebda4972af6be89f6aff2d6b`
       )
       .then((response) => {
         let data = response.data.articles;
